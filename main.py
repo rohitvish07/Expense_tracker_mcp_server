@@ -6,9 +6,9 @@ import tempfile
 HOME_DIR = os.path.expanduser("~")
 DB_DIR = os.path.join(HOME_DIR, ".mcp_expenses")
 os.makedirs(DB_DIR, exist_ok=True)  # Ensure directory exists
-
 DB_PATH = os.path.join(DB_DIR, "expenses.db")
 print(f"Using persistent DB path: {DB_PATH}")
+
 CATEGORIES_PATH = os.path.join(DB_DIR, "categories.json")
 print(f"Using categories path: {CATEGORIES_PATH}")
 
