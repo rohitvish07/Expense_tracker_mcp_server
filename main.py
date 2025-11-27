@@ -3,7 +3,7 @@ import os
 import aiosqlite  # Changed: sqlite3 → aiosqlite
 import tempfile
 # Use temporary directory which should be writable
-DB_PATH = "/mnt/data/expenses.db"
+DB_PATH = "/tmp/expenses.db"
 CATEGORIES_PATH = os.path.join(os.path.dirname(__file__), "categories.json")
 
 print(f"Database path: {DB_PATH}")
@@ -14,7 +14,10 @@ def init_db():  # Keep as sync for initialization
     try:
         # Use synchronous sqlite3 just for initialization
         import sqlite3
-        os.makedirs("/mnt/data", exist_ok=True)
+        os.makedirs("/tmp", exist_ok=True)
+
+        print("Database path:", DB_PATH)
+        print("Writable?", os.access("/tmp", os.W_OK))
         with sqlite3.connect(DB_PATH) as c:
             c.execute("PRAGMA journal_mode=WAL")
             c.execute("""
